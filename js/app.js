@@ -1,9 +1,8 @@
 // Enemies our player must avoid
+var yArrayPosition = [60, 140, 225];
 
 var Enemy = function() {
 
-  var yArrayPosition = [60, 140, 225];
-  var yPosition = yArrayPosition[Math.floor(Math.random()*3)]
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
 
@@ -11,7 +10,7 @@ var Enemy = function() {
   // a helper we've provided to easily load images
   this.sprite = 'images/enemy-bug.png';
   this.x = -85;
-  this.y = yPosition;
+  this.y = yArrayPosition[Math.floor(Math.random()*3)];
   this.speed = Math.floor(Math.random()*20)+200
 };
 
@@ -19,11 +18,9 @@ var Enemy = function() {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
 
-    var yArrayPosition = [60, 140, 225];
-    var yPosition = yArrayPosition[Math.floor(Math.random()*3)]
   if (this.x > 485){
     this.x = -85;
-    this.y = yPosition;
+    this.y = yArrayPosition[Math.floor(Math.random()*3)];
   }else{
     this.x = this.x + (dt*this.speed)
   }
@@ -46,8 +43,9 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function(){
   this.sprite ='images/char-boy.png';
-  this.x = 400/2;
+  this.x = 200;
   this.y = 400;
+  this.score = 0;
 
 };
 
@@ -68,6 +66,7 @@ var allEnemies = [new Enemy(), new Enemy(), new Enemy()];
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
+
   var allowedKeys = {
     37: 'left',
     38: 'up',
@@ -77,3 +76,34 @@ document.addEventListener('keyup', function(e) {
 
   player.handleInput(allowedKeys[e.keyCode]);
 });
+
+Player.prototype.handleInput = function(keys) {
+
+  switch(keys){
+    case 'left':
+    var leftPosition = this.x - 100;
+    if (leftPosition >= 0){
+      this.x = leftPosition;
+    };
+    break;
+    case 'right':
+    var rightPosition = this.x + 100;
+    if (rightPosition <= 400){
+      this.x = rightPosition;
+    };
+    break;
+    case 'up':
+    var upPosition = this.y - 100;
+    if (upPosition >= 0){
+      this.y = upPosition;
+    };
+    break;
+    case 'down':
+    var downPosition = this.y + 100;
+    if (downPosition <= 500){
+      this.y = downPosition;
+    };
+    break;
+  };
+  console.log("Can't go that way");
+};

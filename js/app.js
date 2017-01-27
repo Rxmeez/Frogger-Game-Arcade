@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var yArrayPosition = [60, 140, 225];
+var yArrayPosition = [82, 164, 246];
 
 var Enemy = function() {
 
@@ -24,7 +24,6 @@ Enemy.prototype.update = function(dt) {
   }else{
     this.x = this.x + (dt*this.speed)
   }
-
 
 
   // You should multiply any movement by the dt parameter
@@ -55,6 +54,7 @@ Player.prototype.update = function(keypress){
 
 Player.prototype.render = function(){
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
 };
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -107,4 +107,19 @@ Player.prototype.handleInput = function(keys) {
     default:
     console.log("Can't go that way");
   };
+};
+
+Player.prototype.update = function(dt){
+  this.checkCollisions();
+}
+
+
+
+Player.prototype.checkCollisions = function(){
+
+for(i = 0; i < allEnemies.length; i++)
+  if ((this.x <= allEnemies[i].x + 25) && (this.x + 25 >= allEnemies[i].x) && (this.y < allEnemies[i].y + 25) && (this.y + 25 > allEnemies[i].y)){
+    console.log("COLLISION")
+  };
+
 };

@@ -93,17 +93,18 @@ Player.prototype.handleInput = function(keys) {
     };
     break;
     case 'up':
-    var upPosition = this.y - 100;
-    if (upPosition >= 0){
+    var upPosition = this.y - 82;
+    if (upPosition >= -82){
       this.y = upPosition;
     };
     break;
     case 'down':
-    var downPosition = this.y + 100;
-    if (downPosition <= 500){
+    var downPosition = this.y + 82;
+    if (downPosition <= 400){
       this.y = downPosition;
     };
     break;
+    default:
+    console.log("Can't go that way");
   };
-  console.log("Can't go that way");
 };

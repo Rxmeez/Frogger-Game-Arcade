@@ -52,6 +52,7 @@ var Player = function(){
   this.y = 400;
   this.width = 80;
   this.height = 50;
+  this.score = 0;
 
 };
 
@@ -118,14 +119,21 @@ Player.prototype.handleInput = function(keys) {
 
 Player.prototype.update = function(dt){
   this.checkCollisions();
-
-  this.score();
+if (this.y < 0){
+  this.score += 20;
+console.log("Win!");
+console.log(this.score);
+this.x = 400/2;
+this.y = 400;
+}else{
+  this.score = this.score
+}
 }
 
 Player.prototype.reset = function(){
   this.x = 400/2;
   this.y = 400;
-
+  this.score = 0
   console.log("reset");
 }
 
@@ -137,12 +145,5 @@ for(i = 0; i < allEnemies.length; i++)
 
     this.reset();
   };
-
-}
-
-Player.prototype.score = function(){
-  if (this.y < 0){
-  console.log("Win!");
-};
 
 }

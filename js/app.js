@@ -1,5 +1,9 @@
 // Enemies our player must avoid
-var yArrayPosition = [82, 164, 246];
+var charXMove = 101;
+var charYMove = 83;
+var enemyXPosition = 101;
+var enemyYPosition = [60, 140, 220];
+
 
 var Enemy = function() {
 
@@ -9,8 +13,10 @@ var Enemy = function() {
   // The image/sprite for our enemies, this uses
   // a helper we've provided to easily load images
   this.sprite = 'images/enemy-bug.png';
-  this.x = -85;
-  this.y = yArrayPosition[Math.floor(Math.random()*3)];
+  this.x = -enemyXPosition;
+  this.y = enemyYPosition[Math.floor(Math.random()*3)];
+  this.width = 80;
+  this.height= 50;
   this.speed = Math.floor(Math.random()*20)+200
 };
 
@@ -18,9 +24,9 @@ var Enemy = function() {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
 
-  if (this.x > 485){
-    this.x = -85;
-    this.y = yArrayPosition[Math.floor(Math.random()*3)];
+  if (this.x > 500){
+    this.x = -enemyXPosition;
+    this.y = enemyYPosition[Math.floor(Math.random()*3)];
   }else{
     this.x = this.x + (dt*this.speed)
   }
@@ -44,7 +50,8 @@ var Player = function(){
   this.sprite ='images/char-boy.png';
   this.x = 200;
   this.y = 400;
-  this.score = 0;
+  this.width = 80;
+  this.height = 50;
 
 };
 
@@ -111,15 +118,31 @@ Player.prototype.handleInput = function(keys) {
 
 Player.prototype.update = function(dt){
   this.checkCollisions();
+
+  this.score();
 }
 
+Player.prototype.reset = function(){
+  this.x = 400/2;
+  this.y = 400;
 
+  console.log("reset");
+}
 
 Player.prototype.checkCollisions = function(){
 
 for(i = 0; i < allEnemies.length; i++)
-  if ((this.x <= allEnemies[i].x + 25) && (this.x + 25 >= allEnemies[i].x) && (this.y < allEnemies[i].y + 25) && (this.y + 25 > allEnemies[i].y)){
-    console.log("COLLISION")
+  if ((this.x <= allEnemies[i].x + allEnemies[i].width) && (this.x + this.width >= allEnemies[i].x) && (this.y < allEnemies[i].y + allEnemies[i].height) && (this.y + this.height > allEnemies[i].y)){
+    console.log("COLLISION");
+
+    this.reset();
   };
 
+}
+
+Player.prototype.score = function(){
+  if (this.y < 0){
+  console.log("Win!");
 };
+
+}

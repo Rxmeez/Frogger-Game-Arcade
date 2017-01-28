@@ -1,3 +1,9 @@
 body {
-    text-align: center;
+  text-align: center;
+  background-color: #124647;
+  color:#ffffff;
+  font-family: 'Fredoka One', cursive;
+}
+h1{
+  font-size: 50px;
 }

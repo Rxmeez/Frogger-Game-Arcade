@@ -125,6 +125,8 @@ console.log("Win!");
 console.log(this.score);
 this.x = 400/2;
 this.y = 400;
+var scoreCard = document.getElementById('score');
+scoreCard.innerHTML = this.score;
 }else{
   this.score = this.score
 }
@@ -134,6 +136,7 @@ Player.prototype.reset = function(){
   this.x = 400/2;
   this.y = 400;
   this.score = 0
+  document.getElementById('score').innerHTML = this.score;
   console.log("reset");
 }
 

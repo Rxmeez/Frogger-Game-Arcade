@@ -1,5 +1,4 @@
 # Frogger Arcade Game
-===============================
 
 One of the main projects for Udacity Front-End Web Development Nanodegree.
 Its a Classic Arcade Game, if you could like to play my version of this game please click on the link below.
